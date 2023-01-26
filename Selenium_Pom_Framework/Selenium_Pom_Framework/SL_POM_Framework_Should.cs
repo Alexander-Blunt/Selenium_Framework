@@ -3,16 +3,14 @@ using SL_Pom_Framework_Test.lib.pages;
 
 namespace SL_Pom_Framework_Test;
 
-public class SL_Signin_Tests
+public class GivenIamOntheHomepage
 {
     private SL_Website<ChromeDriver> SL_Website = new();
 
     [Test]
     [Category("Happy")]
-    public void GivenIAmOnTheHomePage_WhenIEnterAValidEmailAndValidPassword_ThenIShouldLandOnTheInventoryPage()
+    public void WhenIEnterAValidEmailAndValidPassword_ThenIShouldLandOnTheInventoryPage()
     {
-        // Maximise browser
-        SL_Website.SeleniumDriver.Manage().Window.Maximize();
         // Navigate to home page
         SL_Website.SL_HomePage.VisitHomePage();
         // Enter valid username
@@ -23,6 +21,22 @@ public class SL_Signin_Tests
         SL_Website.SL_HomePage.ClickLoginButton();
         // Check landing page is correct
         Assert.That(SL_Website.SeleniumDriver.Url, Is.EqualTo(AppConfigReader.InventoryPageUrl));
+    }
+
+    [Test]
+    [Category("Sad")]
+    public void WhenIEnteraValidEmailandInvalidPassword_ThenIshouldStayOnTheHomepage()
+    {
+        // Navigate to home page
+        SL_Website.SL_HomePage.VisitHomePage();
+        // Enter valid username
+        SL_Website.SL_HomePage.EnterUserName(AppConfigReader.UserName);
+        // Enter valid password
+        SL_Website.SL_HomePage.EnterPassword("passwort");
+        // Click login button
+        SL_Website.SL_HomePage.ClickLoginButton();
+        // Check landing page is correct
+        Assert.That(SL_Website.SeleniumDriver.Url, Is.EqualTo(AppConfigReader.HomePageUrl));
     }
 
     // Will run once after all tests have finished

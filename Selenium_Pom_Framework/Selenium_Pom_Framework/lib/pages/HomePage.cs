@@ -6,28 +6,32 @@ namespace SL_Pom_Framework_Test.lib.pages;
 
 public class HomePage
 {
+    private readonly IWebDriver _seleniumDriver;
     
     public HomePage(IWebDriver seleniumDriver)
     {
-
+        _seleniumDriver = seleniumDriver;
     }
+
     public void VisitHomePage()
     {
-        throw new NotImplementedException();
+        _seleniumDriver.Navigate().GoToUrl(AppConfigReader.HomePageUrl);
     }
 
-    internal void ClickLoginButton()
+    public void EnterUserName(string userName)
     {
-        throw new NotImplementedException();
+        var usernameElement = _seleniumDriver.FindElement(By.Id("user-name"));
+        usernameElement.SendKeys(userName);
     }
 
-    internal void EnterPassword(string password)
+    public void EnterPassword(string password)
     {
-        throw new NotImplementedException();
+        var passwordElement = _seleniumDriver.FindElement(By.Id("password"));
+        passwordElement.SendKeys(password);
     }
 
-    internal void EnterUserName(string userName)
+    public void ClickLoginButton()
     {
-        throw new NotImplementedException();
+        _seleniumDriver.FindElement(By.Id("login-button")).Click();
     }
 }
