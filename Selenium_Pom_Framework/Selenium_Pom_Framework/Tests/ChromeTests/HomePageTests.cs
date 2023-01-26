@@ -1,15 +1,15 @@
 using OpenQA.Selenium.Chrome;
 using SL_Pom_Framework_Test.lib.pages;
 
-namespace SL_Pom_Framework_Test;
+namespace SL_Pom_Framework_Test.Tests.ChromeTests;
 
-public class GivenIamOntheHomepage
+public class HomePageTests
 {
     private SL_Website<ChromeDriver> SL_Website = new();
 
     [Test]
     [Category("Happy")]
-    public void WhenIEnterAValidUsernameAndValidPassword_ThenIShouldLandOnTheInventoryPage()
+    public void GivenIamOntheHomepage_WhenIEnterAValidUsernameAndValidPassword_ThenIShouldLandOnTheInventoryPage()
     {
         // Navigate to home page
         SL_Website.SL_HomePage.VisitHomePage();
@@ -20,12 +20,12 @@ public class GivenIamOntheHomepage
         // Click login button
         SL_Website.SL_HomePage.ClickLoginButton();
         // Check landing page is correct
-        Assert.That(SL_Website.SeleniumDriver.Url, Is.EqualTo(AppConfigReader.InventoryPageUrl));
+        Assert.That(SL_Website.GetUrl(), Is.EqualTo(AppConfigReader.InventoryPageUrl));
     }
 
     [Test]
     [Category("Sad")]
-    public void WhenIEnterAValidUsernameAndInvalidPassword_ThenIShouldStayOnTheHomepage()
+    public void GivenIamOntheHomepage_WhenIEnterAValidUsernameAndInvalidPassword_ThenIShouldStayOnTheHomepage()
     {
         // Navigate to home page
         SL_Website.SL_HomePage.VisitHomePage();
@@ -36,12 +36,12 @@ public class GivenIamOntheHomepage
         // Click login button
         SL_Website.SL_HomePage.ClickLoginButton();
         // Check landing page is correct
-        Assert.That(SL_Website.SeleniumDriver.Url, Is.EqualTo(AppConfigReader.HomePageUrl));
+        Assert.That(SL_Website.GetUrl(), Is.EqualTo(AppConfigReader.HomePageUrl));
     }
 
     [Test]
     [Category("Sad")]
-    public void WhenIEnterAValidUsernameAndInvalidPassword_ThenIShouldSeeCorrectErrorMessage()
+    public void GivenIamOntheHomepage_WhenIEnterAValidUsernameAndInvalidPassword_ThenIShouldSeeCorrectErrorMessage()
     {
         // Navigate to home page
         SL_Website.SL_HomePage.VisitHomePage();
@@ -57,7 +57,7 @@ public class GivenIamOntheHomepage
 
     [Test]
     [Category("Sad")]
-    public void WhenIDoNotEnterAUsername_ThenIShouldSeeCorrectErrorMessage()
+    public void GivenIamOntheHomepage_WhenIDoNotEnterAUsername_ThenIShouldSeeCorrectErrorMessage()
     {
         // Navigate to home page
         SL_Website.SL_HomePage.VisitHomePage();
@@ -71,7 +71,7 @@ public class GivenIamOntheHomepage
 
     [Test]
     [Category("Sad")]
-    public void WhenIDoNotEnterAPassword_ThenIShouldSeeCorrectErrorMessage()
+    public void GivenIamOntheHomepage_WhenIDoNotEnterAPassword_ThenIShouldSeeCorrectErrorMessage()
     {
         // Navigate to home page
         SL_Website.SL_HomePage.VisitHomePage();
