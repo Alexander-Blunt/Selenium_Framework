@@ -34,4 +34,9 @@ public class HomePage
     {
         _seleniumDriver.FindElement(By.Id("login-button")).Click();
     }
+
+    public string GetErrorMessage()
+    {
+        return _seleniumDriver.FindElement(By.CssSelector("h3[data-test='error']")).Text;
+    }
 }

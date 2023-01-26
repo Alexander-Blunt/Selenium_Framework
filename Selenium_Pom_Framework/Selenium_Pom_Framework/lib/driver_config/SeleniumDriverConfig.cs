@@ -9,13 +9,11 @@ public class SeleniumDriverConfig<T> where T : IWebDriver, new()
     public IWebDriver Driver { get; internal set; }
     public SeleniumDriverConfig(int pageLoadInSecs, int implicitWaitInSecs, bool headless)
     {
-        //configure the driver here
-        Driver = new T();
-
         //check driver is of valid type
         CheckDriverType();
 
         if (headless) SetHeadless();
+        else Driver = new T();
 
         Driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(pageLoadInSecs);
 
@@ -24,7 +22,7 @@ public class SeleniumDriverConfig<T> where T : IWebDriver, new()
 
     private void CheckDriverType()
     {
-        if (!(Driver is ChromeDriver) && !(Driver is FirefoxDriver))
+        if (!(typeof(T) == typeof(ChromeDriver)) && !(typeof(T) == typeof(FirefoxDriver)))
         {
             throw new ArgumentException("IWebDriver must be of type ChromeDriver or FirefoxDriver");
         }
@@ -32,18 +30,17 @@ public class SeleniumDriverConfig<T> where T : IWebDriver, new()
 
     private void SetHeadless()
     {
-        if (Driver is ChromeDriver)
+        if (typeof(T) == typeof(ChromeDriver))
         {
             ChromeOptions options = new();
             options.AddArgument("headless");
             Driver = new ChromeDriver(options);
         }
-        else if (Driver is FirefoxDriver)
+        else if (typeof(T) == typeof(FirefoxDriver))
         {
             FirefoxOptions options = new();
             options.AddArgument("-headless");
             Driver = new FirefoxDriver(options);
-
         }
     }
 }

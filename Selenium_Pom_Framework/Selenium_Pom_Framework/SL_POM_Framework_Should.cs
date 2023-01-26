@@ -25,18 +25,34 @@ public class GivenIamOntheHomepage
 
     [Test]
     [Category("Sad")]
-    public void WhenIEnteraValidEmailandInvalidPassword_ThenIshouldStayOnTheHomepage()
+    public void WhenIEnterAValidEmailAndInvalidPassword_ThenIShouldStayOnTheHomepage()
     {
         // Navigate to home page
         SL_Website.SL_HomePage.VisitHomePage();
         // Enter valid username
         SL_Website.SL_HomePage.EnterUserName(AppConfigReader.UserName);
-        // Enter valid password
+        // Enter invalid password
         SL_Website.SL_HomePage.EnterPassword("passwort");
         // Click login button
         SL_Website.SL_HomePage.ClickLoginButton();
         // Check landing page is correct
         Assert.That(SL_Website.SeleniumDriver.Url, Is.EqualTo(AppConfigReader.HomePageUrl));
+    }
+
+    [Test]
+    [Category("Sad")]
+    public void WhenIEnterAValidEmailAndInvalidPassword_ThenIShouldSeeCorrectErrorMessage()
+    {
+        // Navigate to home page
+        SL_Website.SL_HomePage.VisitHomePage();
+        // Enter valid username
+        SL_Website.SL_HomePage.EnterUserName(AppConfigReader.UserName);
+        // Enter invalid password
+        SL_Website.SL_HomePage.EnterPassword("passwort");
+        // Click login button
+        SL_Website.SL_HomePage.ClickLoginButton();
+        // Check error message is "Epic sadface: Username and password do not match any user in this service"
+        Assert.That(SL_Website.SL_HomePage.GetErrorMessage(), Is.EqualTo("Epic sadface: Username and password do not match any user in this service"));
     }
 
     // Will run once after all tests have finished
