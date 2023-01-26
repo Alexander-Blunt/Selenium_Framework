@@ -18,4 +18,11 @@ public class SL_Website<T> where T : IWebDriver, new()
         SL_HomePage = new HomePage(SeleniumDriver);
     }
 
+    public void CleanUp()
+    {
+        // Quite the driver, closing associated window
+        SeleniumDriver.Quit();
+        // Releases unmanaged resources
+        SeleniumDriver.Dispose();
+    }
 }

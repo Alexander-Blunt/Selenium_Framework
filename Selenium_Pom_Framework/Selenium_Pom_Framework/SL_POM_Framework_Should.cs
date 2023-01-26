@@ -9,7 +9,7 @@ public class GivenIamOntheHomepage
 
     [Test]
     [Category("Happy")]
-    public void WhenIEnterAValidEmailAndValidPassword_ThenIShouldLandOnTheInventoryPage()
+    public void WhenIEnterAValidUsernameAndValidPassword_ThenIShouldLandOnTheInventoryPage()
     {
         // Navigate to home page
         SL_Website.SL_HomePage.VisitHomePage();
@@ -25,7 +25,7 @@ public class GivenIamOntheHomepage
 
     [Test]
     [Category("Sad")]
-    public void WhenIEnterAValidEmailAndInvalidPassword_ThenIShouldStayOnTheHomepage()
+    public void WhenIEnterAValidUsernameAndInvalidPassword_ThenIShouldStayOnTheHomepage()
     {
         // Navigate to home page
         SL_Website.SL_HomePage.VisitHomePage();
@@ -41,7 +41,7 @@ public class GivenIamOntheHomepage
 
     [Test]
     [Category("Sad")]
-    public void WhenIEnterAValidEmailAndInvalidPassword_ThenIShouldSeeCorrectErrorMessage()
+    public void WhenIEnterAValidUsernameAndInvalidPassword_ThenIShouldSeeCorrectErrorMessage()
     {
         // Navigate to home page
         SL_Website.SL_HomePage.VisitHomePage();
@@ -55,13 +55,38 @@ public class GivenIamOntheHomepage
         Assert.That(SL_Website.SL_HomePage.GetErrorMessage(), Is.EqualTo("Epic sadface: Username and password do not match any user in this service"));
     }
 
+    [Test]
+    [Category("Sad")]
+    public void WhenIDoNotEnterAUsername_ThenIShouldSeeCorrectErrorMessage()
+    {
+        // Navigate to home page
+        SL_Website.SL_HomePage.VisitHomePage();
+        // Enter valid password
+        SL_Website.SL_HomePage.EnterPassword(AppConfigReader.Password);
+        // Click login button
+        SL_Website.SL_HomePage.ClickLoginButton();
+        // Check error message is "Epic sadface: Username is required"
+        Assert.That(SL_Website.SL_HomePage.GetErrorMessage(), Is.EqualTo("Epic sadface: Username is required"));
+    }
+
+    [Test]
+    [Category("Sad")]
+    public void WhenIDoNotEnterAPassword_ThenIShouldSeeCorrectErrorMessage()
+    {
+        // Navigate to home page
+        SL_Website.SL_HomePage.VisitHomePage();
+        // Enter valid username
+        SL_Website.SL_HomePage.EnterUserName(AppConfigReader.UserName);
+        // Click login button
+        SL_Website.SL_HomePage.ClickLoginButton();
+        // Check error message is "Epic sadface: Username is required"
+        Assert.That(SL_Website.SL_HomePage.GetErrorMessage(), Is.EqualTo("Epic sadface: Password is required"));
+    }
+
     // Will run once after all tests have finished
     [OneTimeTearDown]
     public void CleanUp()
     {
-        // Quite the driver, closing associated window
-        SL_Website.SeleniumDriver.Quit();
-        // Releases unmanaged resources
-        SL_Website.SeleniumDriver.Dispose();
+        SL_Website.CleanUp();
     }
 }
