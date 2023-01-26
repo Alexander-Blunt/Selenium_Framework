@@ -10,7 +10,7 @@ public class SL_Website<T> where T : IWebDriver, new()
     public IWebDriver SeleniumDriver { get; internal set; }
     public HomePage SL_HomePage { get; internal set; }
 
-    public SL_Website(int pageLoadInSecs = 1, int implicitWaitInSecs = 2, bool headless = true)
+    public SL_Website(int pageLoadInSecs = 3, int implicitWaitInSecs = 3, bool headless = true)
     {
         SeleniumDriverConfig<T> seleniumDriverConfig = new(pageLoadInSecs, implicitWaitInSecs, headless);
 
