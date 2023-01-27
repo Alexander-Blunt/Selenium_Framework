@@ -41,7 +41,15 @@ namespace SL_Pom_Framework_Test.Tests.FirefoxTests
         [Category("Happy")]
         public void GivenIAmOnTheInventoryPage_WhenIClickAddToCartOnAnItem_TheAddToCartButtonChangesToRemove()
         {
+            SL_Website.LogOn();
 
+            //navigate to inventory page
+            SL_Website.SL_InventoryPage.VisitInventoryPage();
+
+            //click on the add to cart button
+            SL_Website.SL_InventoryPage.InventoryItems[0].ClickButton();
+
+            Assert.That(SL_Website.SL_InventoryPage.InventoryItems[0].GetButtonText(), Is.EqualTo("REMOVE"));
         }
 
         // Will run once after all tests have finished
