@@ -47,6 +47,7 @@ public class InventoryItem
     {
         return WebElement.FindElement(By.CssSelector("div[class='inventory_item_price]")).Text;
     }
+
     public string GetButtonText()
     {
         return WebElement.FindElement(By.TagName("button")).Text;
