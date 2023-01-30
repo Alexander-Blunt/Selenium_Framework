@@ -34,7 +34,7 @@ public class SL_Website<T> where T : IWebDriver, new()
 
     public void CleanUp()
     {
-        // Quite the driver, closing associated window
+        // Quit the driver, closing associated window
         SeleniumDriver.Quit();
         // Releases unmanaged resources
         SeleniumDriver.Dispose();

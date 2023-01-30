@@ -5,7 +5,7 @@ namespace SL_Pom_Framework_Test.lib.pages;
 public class InventoryPage
 {
     private readonly IWebDriver _driver;
-    public InventoryItem[] InventoryItems { get; internal set; }
+    public InventoryItem[]? InventoryItems { get; internal set; }
 
     public InventoryPage(IWebDriver seleniumDriver)
     {
